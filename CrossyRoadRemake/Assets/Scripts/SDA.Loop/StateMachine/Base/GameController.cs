@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SDA.Input;
+using SDA.UI;
 using UnityEngine.Events;
 
 namespace SDA.Loop
@@ -11,8 +12,17 @@ namespace SDA.Loop
         #region STATES
 
         private MenuState menuState;
+        private GameState gameState;
 
         #endregion
+
+        [SerializeField]
+        private MenuView menuView;
+
+        [SerializeField]
+        private GameView gameView;
+
+        private UnityAction transitionToGameState;
 
         [SerializeField]
         private CrossyInput crossyInput;
@@ -21,7 +31,10 @@ namespace SDA.Loop
 
         private void Start()
         {
-            menuState = new MenuState(crossyInput);
+            transitionToGameState = () => ChangeState(gameState);
+
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView);
+            gameState = new GameState(gameView);
 
             ChangeState(menuState);
         }

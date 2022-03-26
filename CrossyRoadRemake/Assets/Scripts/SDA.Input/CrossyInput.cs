@@ -11,7 +11,8 @@ namespace SDA.Input
         Forward,
         Backward,
         Left,
-        Right
+        Right,
+        Any
     }
 
     public class CrossyInput : MonoBehaviour
@@ -23,6 +24,7 @@ namespace SDA.Input
         private UnityAction moveBackwardAction;
         private UnityAction moveLeftAction;
         private UnityAction moveRightAction;
+        private UnityAction onAnyKey;
 
         public void AddListener(InputType inputType, UnityAction callback)
         {
@@ -40,6 +42,9 @@ namespace SDA.Input
                 case InputType.Right:
                     moveRightAction += callback;
                     break;
+                case InputType.Any:
+                    onAnyKey += callback;
+                    break;
                 default:
                     break;
             }
@@ -51,6 +56,7 @@ namespace SDA.Input
             moveBackwardAction = null;
             moveLeftAction = null;
             moveRightAction = null;
+            onAnyKey = null;
         }
 
         public void OnMoveForward(InputAction.CallbackContext ctx) // Do tej metody trzeba dodaæ argument typu InputAction.CallbackContext
@@ -85,24 +91,12 @@ namespace SDA.Input
             }
         }
 
-        //public void MoveForward_AddListener(UnityAction moveForwardAction)
-        //{
-        //    this.moveForwardAction = moveForwardAction;
-        //}
-
-        //public void MoveBackward_AddListener(UnityAction moveBackwardAction)
-        //{
-        //    this.moveBackwardAction = moveBackwardAction;
-        //}
-
-        //public void MoveLeft_AddListener(UnityAction moveLeftAction)
-        //{
-        //    this.moveLeftAction = moveLeftAction;
-        //}
-
-        //public void MoveRight_AddListener(UnityAction moveRightAction)
-        //{
-        //    this.moveRightAction = moveRightAction;
-        //}
+        public void OnAnyKeyAction(InputAction.CallbackContext ctx) // Do tej metody trzeba dodaæ argument typu InputAction.CallbackContext
+        {
+            if (ctx.action.WasPerformedThisFrame()) // Bez tego ifa jedno wciœniêcie klawisza spowodowa³oby 3 wywo³ania tego, co jest pod ifem, dziêki niemu mamy tylko 1 wywo³anie
+            {
+                onAnyKey?.Invoke();
+            }
+        }
     } 
 }
