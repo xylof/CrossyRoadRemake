@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SDA.Input;
+using UnityEngine.Events;
 
 namespace SDA.Loop
 {
@@ -12,11 +14,14 @@ namespace SDA.Loop
 
         #endregion
 
+        [SerializeField]
+        private CrossyInput crossyInput;
+
         private BaseState currentlyActiveState;
 
         private void Start()
         {
-            menuState = new MenuState();
+            menuState = new MenuState(crossyInput);
 
             ChangeState(menuState);
         }
