@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using SDA.Input;
 using SDA.UI;
+using SDA.Generation;
 
 namespace SDA.Loop
 {
@@ -12,12 +13,14 @@ namespace SDA.Loop
         private CrossyInput crossyInput;
         private UnityAction transitionToGameState;
         private MenuView menuView;
+        private LaneGenerator laneGenerator;
 
-        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView)
+        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator)
         {
             this.crossyInput = crossyInput;
             this.transitionToGameState = transitionToGameState;
             this.menuView = menuView;
+            this.laneGenerator = laneGenerator;
         }
 
         public override void InitState()
@@ -30,6 +33,8 @@ namespace SDA.Loop
             crossyInput.AddListener(InputType.Backward, TestBac);
             crossyInput.AddListener(InputType.Left, TestLef);
             crossyInput.AddListener(InputType.Right, TestRig);
+
+            laneGenerator.GenerateLevel(20);
         }
 
         public override void UpdateState()

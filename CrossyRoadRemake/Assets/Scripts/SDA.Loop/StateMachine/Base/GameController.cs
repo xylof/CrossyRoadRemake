@@ -4,6 +4,7 @@ using UnityEngine;
 using SDA.Input;
 using SDA.UI;
 using UnityEngine.Events;
+using SDA.Generation;
 
 namespace SDA.Loop
 {
@@ -27,13 +28,16 @@ namespace SDA.Loop
         [SerializeField]
         private CrossyInput crossyInput;
 
+        [SerializeField]
+        private LaneGenerator laneGenerator;
+
         private BaseState currentlyActiveState;
 
         private void Start()
         {
             transitionToGameState = () => ChangeState(gameState);
 
-            menuState = new MenuState(crossyInput, transitionToGameState, menuView);
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator);
             gameState = new GameState(gameView);
 
             ChangeState(menuState);
