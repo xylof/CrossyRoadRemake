@@ -13,5 +13,11 @@ namespace SDA.Core
         {
             carRigidbody.AddForce(direction * Time.fixedDeltaTime * speed, ForceMode.Impulse);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Wall"))
+                Destroy(gameObject);
+        }
     } 
 }

@@ -36,7 +36,7 @@ namespace SDA.Generation
         public void SpawnCar(Transform parent)
         {
             int randomIndex = Random.Range(0, cars.Length);
-            var randomPoint = Random.Range(0, spawnPoints.Length);
+            int randomPoint = Random.Range(0, spawnPoints.Length);
             CarData carData = cars[randomIndex];
 
             Car instantiatedCar = Instantiate(carData.Prefab, parent, true);
