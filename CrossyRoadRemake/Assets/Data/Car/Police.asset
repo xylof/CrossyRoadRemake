@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cbe6ea823f1294db0ff0eea0bce80c, type: 3}
   m_Name: Police
   m_EditorClassIdentifier: 
-  prefab: {fileID: -8135193077918925173, guid: 18a40f9d29c51ff43b7711c54aa2d362, type: 3}
-  baseSpeed: 800
+  baseSpeed: 500

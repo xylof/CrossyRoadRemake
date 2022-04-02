@@ -9,6 +9,11 @@ namespace SDA.Utils
         private Dictionary<CarType, Stack<TPoolable>> pooledObjects = new Dictionary<CarType, Stack<TPoolable>>();
         private Dictionary<CarType, int> sizes = new Dictionary<CarType, int>();
 
+        public int GetSize(CarType type)
+        {
+            return sizes[type];
+        }
+
         public CarPool(Dictionary<CarType, List<TPoolable>> objectsToPool)
         {
             foreach (KeyValuePair<CarType, List<TPoolable>> kvp in objectsToPool)

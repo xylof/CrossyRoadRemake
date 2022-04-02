@@ -1,3 +1,6 @@
+using SDA.Core;
+using SDA.Data;
+using SDA.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,37 +9,31 @@ namespace SDA.Generation
 {
     public class LaneGenerator : MonoBehaviour
     {
-        [SerializeField]
-        private Lane lanePrefab;
-
-        [SerializeField]
-        private GameObject lanesParent;
-
-        [SerializeField]
-        private Transform startingPos;
-
-        [SerializeField]
-        private float distance = 1.5f;
-
+        [SerializeField] private Lane lanePrefab;
+        [SerializeField] private Transform lanesParent;
+        [SerializeField] private Transform startingPos;
+        [SerializeField] private float distance = 1.5f;
         private int counter;
 
-        public void GenerateLevel(int lanesCount)
+        public void GenerateLevel(CarPool<Car> carPool, int lanesCount)
         {
             for (int i = 0; i < lanesCount; i++)
             {
-                GenerateLane();
+                var randomCar = Random.Range(0, 8);
+                var spawnPointIndex = Random.Range(0, 2);
+
+                GenerateLane(carPool, (CarType)randomCar, spawnPointIndex);
             }
         }
 
-        public void GenerateLane()
+        public void GenerateLane(CarPool<Car> carPool, CarType carType, int spawnPointIndex)
         {
-            Lane lane = Instantiate(lanePrefab, lanesParent.transform, true);
+            Lane lane = Instantiate(lanePrefab, lanesParent);
 
             lane.transform.position = startingPos.position + Vector3.right * distance * counter++;
             lane.transform.rotation = startingPos.rotation;
             lane.SetColor(counter);
-
-            lane.InitialzieLane();
+            lane.InitializeLane(carPool, carType, spawnPointIndex);
         }
     } 
 }

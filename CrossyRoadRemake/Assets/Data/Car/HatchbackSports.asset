@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cbe6ea823f1294db0ff0eea0bce80c, type: 3}
   m_Name: HatchbackSports
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8330957853458223306, guid: 9ebfcc9e1a08b6540886076dc0d4bd62, type: 3}
-  baseSpeed: 800
+  baseSpeed: 500
