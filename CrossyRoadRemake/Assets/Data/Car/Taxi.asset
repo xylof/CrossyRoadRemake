@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Taxi
   m_EditorClassIdentifier: 
   prefab: {fileID: 5993681756449857931, guid: c6424c837f356d44094968f58ac58e98, type: 3}
-  baseSpeed: 1
+  baseSpeed: 800

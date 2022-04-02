@@ -43,8 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2585cef92eec34394aecb41005ec21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint1: {fileID: 8159512782987512330}
-  spawnPoint2: {fileID: 8159512783197110680}
+  spawnPoints:
+  - spawnPositionTransform: {fileID: 8159512782987512330}
+    direction: 1
+  - spawnPositionTransform: {fileID: 8159512783197110680}
+    direction: 0
   cars:
   - {fileID: 11400000, guid: f80aebd7df0e649458fd66761314a183, type: 2}
   - {fileID: 11400000, guid: 04d5dd9db767e3841be18af0b4394e9e, type: 2}

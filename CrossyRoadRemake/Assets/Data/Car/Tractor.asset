@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tractor
   m_EditorClassIdentifier: 
   prefab: {fileID: 3731192955899334676, guid: b7676830c2b5d8549a480d03c2ac2602, type: 3}
-  baseSpeed: 1
+  baseSpeed: 800
