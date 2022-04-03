@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SDA.Utils;
 using SDA.Data;
+using UnityEngine.Events;
 
 namespace SDA.Core
 {
@@ -10,6 +11,8 @@ namespace SDA.Core
     {
         [SerializeField] private CarData carData;
         [SerializeField] private Rigidbody carRigidbody;
+
+        private UnityAction<Car> onWallHit;
 
         public void Move(Vector3 direction, float speed)
         {
@@ -21,14 +24,20 @@ namespace SDA.Core
             return carData.BaseSpeed;
         }
 
+        public void OnWallHitAddListener(UnityAction<Car> onWallHit)
+        {
+            this.onWallHit = onWallHit;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Wall"))
-                Destroy(gameObject);
+                onWallHit.Invoke(this);
         }
 
         public void PrepareForActivate()
         {
+            carRigidbody.velocity = Vector3.zero;
             gameObject.SetActive(true);
         }
 

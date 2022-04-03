@@ -36,7 +36,7 @@ namespace SDA.Generation
             sizes.Add(CarType.Taxi, 15);
             sizes.Add(CarType.Tractor, 15);
 
-            carsPool = new CarPool<Car>(sizes);
+            carsPool = new CarPool<Car>(sizes, storageParent);
             InitializePool(CarType.Ambulance, ambulancePrefab);
             InitializePool(CarType.Delivery, deliveryPrefab);
             InitializePool(CarType.Firetruck, firetruckPrefab);
@@ -52,7 +52,7 @@ namespace SDA.Generation
             for (int i = 0; i < carsPool.GetSize(type); i++)
             {
                 var obj = Instantiate(prefab);
-                carsPool.ReturnToPool(type, obj, storageParent);
+                carsPool.ReturnToPool(type, obj);
             }
         }
     } 

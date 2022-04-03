@@ -8,14 +8,17 @@ namespace SDA.Utils
     {
         private Dictionary<CarType, Stack<TPoolable>> pooledObjects = new Dictionary<CarType, Stack<TPoolable>>();
         private Dictionary<CarType, int> sizes = new Dictionary<CarType, int>();
+        private Transform poolParent;
 
         public int GetSize(CarType type)
         {
             return sizes[type];
         }
 
-        public CarPool(Dictionary<CarType, List<TPoolable>> objectsToPool)
+        public CarPool(Dictionary<CarType, List<TPoolable>> objectsToPool, Transform poolParent)
         {
+            this.poolParent = poolParent;
+
             foreach (KeyValuePair<CarType, List<TPoolable>> kvp in objectsToPool)
             {
                 sizes.Add(kvp.Key, kvp.Value.Count);
@@ -29,8 +32,10 @@ namespace SDA.Utils
             }
         }
 
-        public CarPool(Dictionary<CarType, int> sizes)
+        public CarPool(Dictionary<CarType, int> sizes, Transform poolParent)
         {
+            this.poolParent = poolParent;
+
             foreach (KeyValuePair<CarType, int> kvp in sizes)
             {
                 this.sizes.Add(kvp.Key, kvp.Value);
@@ -59,20 +64,20 @@ namespace SDA.Utils
             return false;
         }
 
-        public void ReturnToPool(CarType type, TPoolable car, Transform parent)
+        public void ReturnToPool(CarType type, TPoolable car)
         {
             if (pooledObjects[type].Count <= sizes[type])
             {
-                car.PrepareForDeactivate(parent);
+                car.PrepareForDeactivate(poolParent);
                 pooledObjects[type].Push(car);
             }
         }
 
-        public bool TryReturnToPool(CarType type, TPoolable car, Transform parent)
+        public bool TryReturnToPool(CarType type, TPoolable car)
         {
             if (pooledObjects[type].Count <= sizes[type])
             {
-                car.PrepareForDeactivate(parent);
+                car.PrepareForDeactivate(poolParent);
                 pooledObjects[type].Push(car);
                 return true;
             }

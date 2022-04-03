@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SDA.Generation
 {
@@ -44,12 +43,18 @@ namespace SDA.Generation
             spawnPointIndex = spawnIndex;
         }
 
+        private void ReturnToPool(Car car)
+        {
+            pool.ReturnToPool(typeToSpawn, car);
+        }
+
         public void SpawnCar(Transform parent)
         {
             Car obj = pool.GetFromPool(typeToSpawn);
             obj.transform.SetParent(parent);
             obj.transform.position = spawnPoints[spawnPointIndex].spawnPositionTransform.position;
             obj.transform.rotation = spawnPoints[spawnPointIndex].spawnPositionTransform.rotation;
+            obj.OnWallHitAddListener(ReturnToPool);
             obj.Move(spawnPoints[spawnPointIndex].GetDirection(), obj.GetSpeed());
         }
     } 
