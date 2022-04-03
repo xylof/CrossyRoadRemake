@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using SDA.Input;
 using SDA.UI;
 using SDA.Generation;
+using SDA.Player;
 
 namespace SDA.Loop
 {
@@ -15,25 +16,27 @@ namespace SDA.Loop
         private MenuView menuView;
         private LaneGenerator laneGenerator;
         private CarStorage carStorage;
+        private PlayerMovement playerMovement;
 
-        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator, CarStorage carStorage)
+        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator, CarStorage carStorage, PlayerMovement playerMovement)
         {
             this.crossyInput = crossyInput;
             this.transitionToGameState = transitionToGameState;
             this.menuView = menuView;
             this.laneGenerator = laneGenerator;
             this.carStorage = carStorage;
+            this.playerMovement = playerMovement;
         }
 
         public override void InitState()
         {
             menuView.ShowView();
-            crossyInput.AddListener(InputType.Any, transitionToGameState.Invoke);
+            //crossyInput.AddListener(InputType.Any, transitionToGameState.Invoke);
 
-            //crossyInput.AddListener(InputType.Forward, TestFor);
-            //crossyInput.AddListener(InputType.Backward, TestBac);
-            //crossyInput.AddListener(InputType.Left, TestLef);
-            //crossyInput.AddListener(InputType.Right, TestRig);
+            crossyInput.AddListener(InputType.Forward, playerMovement.MoveForward);
+            crossyInput.AddListener(InputType.Backward, playerMovement.MoveBackward);
+            crossyInput.AddListener(InputType.Left, playerMovement.MoveLeft);
+            crossyInput.AddListener(InputType.Right, playerMovement.MoveRight);
 
             carStorage.InitializeStorage();
             laneGenerator.GenerateLevel(carStorage.CarsPool, 20);
@@ -51,24 +54,24 @@ namespace SDA.Loop
             crossyInput.ClearInputs();
         }
 
-        public void TestFor()
-        {
-            Debug.Log("Forward");
-        }
+        //public void TestFor()
+        //{
+        //    Debug.Log("Forward");
+        //}
 
-        public void TestBac()
-        {
-            Debug.Log("Backward");
-        }
+        //public void TestBac()
+        //{
+        //    Debug.Log("Backward");
+        //}
 
-        public void TestLef()
-        {
-            Debug.Log("Left");
-        }
+        //public void TestLef()
+        //{
+        //    Debug.Log("Left");
+        //}
 
-        public void TestRig()
-        {
-            Debug.Log("Right");
-        }
+        //public void TestRig()
+        //{
+        //    Debug.Log("Right");
+        //}
     } 
 }
