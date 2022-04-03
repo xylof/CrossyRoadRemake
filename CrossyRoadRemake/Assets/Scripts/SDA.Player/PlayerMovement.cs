@@ -1,7 +1,7 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SDA.Player
 {
@@ -9,6 +9,13 @@ namespace SDA.Player
     {
         private float distance = 1.5f;
         private bool canMove = true;
+        private UnityAction onDie;
+        private Vector3 startPos;
+
+        public void InitPlayer()
+        {
+            startPos = transform.position;
+        }
 
         public void MoveForward()
         {
@@ -16,8 +23,8 @@ namespace SDA.Player
                 return;
 
             canMove = false;
-            Vector3 endPosition = transform.position + new Vector3(distance, 0, 0);
-            transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+            Vector3 endPosition = transform.position + Vector3.right * distance;
+            transform.DORotate(new Vector3(0, 90, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
         }
 
@@ -27,8 +34,8 @@ namespace SDA.Player
                 return;
 
             canMove = false;
-            Vector3 endPosition = transform.position + new Vector3(-distance, 0, 0);
-            transform.DORotate(new Vector3(0, 180, 0), 0.2f);
+            Vector3 endPosition = transform.position + Vector3.right * -distance;
+            transform.DORotate(new Vector3(0, 270, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
         }
 
@@ -38,8 +45,8 @@ namespace SDA.Player
                 return;
 
             canMove = false;
-            Vector3 endPosition = transform.position + new Vector3(0, 0, distance);
-            transform.DORotate(new Vector3(0, -90, 0), 0.2f);
+            Vector3 endPosition = transform.position + Vector3.forward * distance;
+            transform.DORotate(new Vector3(0, 0, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
         }
 
@@ -49,16 +56,30 @@ namespace SDA.Player
                 return;
 
             canMove = false;
-            Vector3 endPosition = transform.position + new Vector3(0, 0, -distance);
-            transform.DORotate(new Vector3(0, 90, 0), 0.2f);
+            Vector3 endPosition = transform.position + Vector3.forward * -distance;
+            transform.DORotate(new Vector3(0, 180, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
+        }
+
+        public void OnDieAddListener(UnityAction callback)
+        {
+            onDie = callback;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Wall"))
             {
-                Debug.Log("Die");
+                onDie.Invoke();
+            }
+            else if(other.CompareTag("Car"))
+            {
+                if (Math.Abs(transform.position.y - startPos.y) < 0.1f)
+                {
+                    transform.DOScaleY(0.05f, 0.1f);
+                }
+
+                onDie.Invoke();
             }
         }
     }

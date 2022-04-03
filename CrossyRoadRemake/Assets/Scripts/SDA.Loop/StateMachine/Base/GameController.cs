@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using SDA.Input;
 using SDA.UI;
@@ -16,6 +14,7 @@ namespace SDA.Loop
 
         private MenuState menuState;
         private GameState gameState;
+        private LoseState loseState;
 
         #endregion
 
@@ -25,7 +24,11 @@ namespace SDA.Loop
         [SerializeField]
         private GameView gameView;
 
+        [SerializeField]
+        private LoseView loseView;
+
         private UnityAction transitionToGameState;
+        private UnityAction transitionToLoseState;
 
         [SerializeField]
         private CrossyInput crossyInput;
@@ -47,9 +50,11 @@ namespace SDA.Loop
         private void Start()
         {
             transitionToGameState = () => ChangeState(gameState);
+            transitionToLoseState = () => ChangeState(loseState);
 
-            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage, playerMovement, cameraMovement);
-            gameState = new GameState(gameView);
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage);
+            gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState);
+            loseState = new LoseState(crossyInput, loseView);
 
             ChangeState(menuState);
         }
