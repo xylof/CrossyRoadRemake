@@ -6,6 +6,7 @@ using SDA.Input;
 using SDA.UI;
 using SDA.Generation;
 using SDA.Player;
+using SDA.Core;
 
 namespace SDA.Loop
 {
@@ -17,8 +18,9 @@ namespace SDA.Loop
         private LaneGenerator laneGenerator;
         private CarStorage carStorage;
         private PlayerMovement playerMovement;
+        private CameraMovement cameraMovement;
 
-        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator, CarStorage carStorage, PlayerMovement playerMovement)
+        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator, CarStorage carStorage, PlayerMovement playerMovement, CameraMovement cameraMovement)
         {
             this.crossyInput = crossyInput;
             this.transitionToGameState = transitionToGameState;
@@ -26,6 +28,7 @@ namespace SDA.Loop
             this.laneGenerator = laneGenerator;
             this.carStorage = carStorage;
             this.playerMovement = playerMovement;
+            this.cameraMovement = cameraMovement;
         }
 
         public override void InitState()
@@ -44,7 +47,7 @@ namespace SDA.Loop
 
         public override void UpdateState()
         {
-            Debug.Log("update");
+            cameraMovement.UpdateCameraPosition();
         }
 
         public override void DisposeState()

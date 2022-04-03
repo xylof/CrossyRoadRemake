@@ -36,6 +36,8 @@ namespace SDA.Generation
         private CarType typeToSpawn;
         private int spawnPointIndex;
 
+        private List<Car> spawnedCars = new List<Car>();
+
         public void InitializeGenerator(CarPool<Car> pool, CarType type, int spawnIndex)
         {
             this.pool = pool;
@@ -45,6 +47,7 @@ namespace SDA.Generation
 
         private void ReturnToPool(Car car)
         {
+            spawnedCars.Remove(car);
             pool.ReturnToPool(typeToSpawn, car);
         }
 
@@ -56,6 +59,16 @@ namespace SDA.Generation
             obj.transform.rotation = spawnPoints[spawnPointIndex].spawnPositionTransform.rotation;
             obj.OnWallHitAddListener(ReturnToPool);
             obj.Move(spawnPoints[spawnPointIndex].GetDirection(), obj.GetSpeed());
+            spawnedCars.Add(obj);
+        }
+
+        public void DespawnCars()
+        {
+            for (int i = 0; i < spawnedCars.Count; i++)
+            {
+                pool.ReturnToPool(typeToSpawn, spawnedCars[i]);
+            }
+            spawnedCars.Clear();
         }
     } 
 }

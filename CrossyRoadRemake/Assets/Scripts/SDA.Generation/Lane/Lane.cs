@@ -4,6 +4,7 @@ using SDA.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SDA.Generation
 {
@@ -16,6 +17,8 @@ namespace SDA.Generation
 
         [SerializeField] private Color brightColor;
         [SerializeField] private Color darkColor;
+
+        private UnityAction onDespawn;
 
         public void SetColor(int count)
         {
@@ -43,5 +46,21 @@ namespace SDA.Generation
                 yield return new WaitForSeconds(timeBetweenSpawns);
             }
         }
-    } 
+
+        public void OnDespawnAddListener(UnityAction callback)
+        {
+            onDespawn = callback;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Wall"))
+            {
+                StopAllCoroutines();
+                carGenerator.DespawnCars();
+                onDespawn.Invoke();
+                Destroy(gameObject);
+            }
+        }
+    }
 }

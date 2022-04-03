@@ -53,5 +53,13 @@ namespace SDA.Player
             transform.DORotate(new Vector3(0, 90, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Wall"))
+            {
+                Debug.Log("Die");
+            }
+        }
     }
 }

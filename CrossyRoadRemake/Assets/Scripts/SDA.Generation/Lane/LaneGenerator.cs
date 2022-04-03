@@ -15,8 +15,12 @@ namespace SDA.Generation
         [SerializeField] private float distance = 1.5f;
         private int counter;
 
+        private CarPool<Car> carPool;
+
         public void GenerateLevel(CarPool<Car> carPool, int lanesCount)
         {
+            this.carPool = carPool;
+
             for (int i = 0; i < lanesCount; i++)
             {
                 var randomCar = Random.Range(0, 8);
@@ -24,6 +28,14 @@ namespace SDA.Generation
 
                 GenerateLane(carPool, (CarType)randomCar, spawnPointIndex);
             }
+        }
+
+        private void OnLanedespawn()
+        {
+            var randomCar = Random.Range(0, 8);
+            var spawnPointIndex = Random.Range(0, 2);
+
+            GenerateLane(carPool, (CarType)randomCar, spawnPointIndex);
         }
 
         public void GenerateLane(CarPool<Car> carPool, CarType carType, int spawnPointIndex)
@@ -34,6 +46,7 @@ namespace SDA.Generation
             lane.transform.rotation = startingPos.rotation;
             lane.SetColor(counter);
             lane.InitializeLane(carPool, carType, spawnPointIndex);
+            lane.OnDespawnAddListener(OnLanedespawn);
         }
     } 
 }

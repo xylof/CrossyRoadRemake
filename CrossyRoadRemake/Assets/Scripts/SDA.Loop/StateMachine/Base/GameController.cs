@@ -6,6 +6,7 @@ using SDA.UI;
 using UnityEngine.Events;
 using SDA.Generation;
 using SDA.Player;
+using SDA.Core;
 
 namespace SDA.Loop
 {
@@ -38,13 +39,16 @@ namespace SDA.Loop
         [SerializeField]
         private PlayerMovement playerMovement;
 
+        [SerializeField]
+        private CameraMovement cameraMovement;
+
         private BaseState currentlyActiveState;
 
         private void Start()
         {
             transitionToGameState = () => ChangeState(gameState);
 
-            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage, playerMovement);
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage, playerMovement, cameraMovement);
             gameState = new GameState(gameView);
 
             ChangeState(menuState);
