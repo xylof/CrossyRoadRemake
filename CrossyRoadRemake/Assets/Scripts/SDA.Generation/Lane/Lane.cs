@@ -1,3 +1,6 @@
+using SDA.Core;
+using SDA.Data;
+using SDA.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,9 +29,10 @@ namespace SDA.Generation
             }
         }
 
-        public void InitialzieLane()
+        public void InitializeLane(CarPool<Car> carPool, CarType carType, int spawnPointIndex)
         {
-            StartCoroutine(GenerateCar(3f));
+            carGenerator.InitializeGenerator(carPool, carType, spawnPointIndex);
+            StartCoroutine(GenerateCar(5f));
         }
 
         private IEnumerator GenerateCar(float timeBetweenSpawns)

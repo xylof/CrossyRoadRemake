@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e67943b0a13a7046a1c738d56d40af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carData: {fileID: 11400000, guid: f80aebd7df0e649458fd66761314a183, type: 2}
   carRigidbody: {fileID: -6757478475416086068}
 --- !u!1 &7203633184291209242
 GameObject:

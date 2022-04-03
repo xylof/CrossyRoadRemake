@@ -14,27 +14,29 @@ namespace SDA.Loop
         private UnityAction transitionToGameState;
         private MenuView menuView;
         private LaneGenerator laneGenerator;
+        private CarStorage carStorage;
 
-        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator)
+        public MenuState(CrossyInput crossyInput, UnityAction transitionToGameState, MenuView menuView, LaneGenerator laneGenerator, CarStorage carStorage)
         {
             this.crossyInput = crossyInput;
             this.transitionToGameState = transitionToGameState;
             this.menuView = menuView;
             this.laneGenerator = laneGenerator;
+            this.carStorage = carStorage;
         }
 
         public override void InitState()
         {
             menuView.ShowView();
-
             crossyInput.AddListener(InputType.Any, transitionToGameState.Invoke);
 
-            crossyInput.AddListener(InputType.Forward, TestFor);
-            crossyInput.AddListener(InputType.Backward, TestBac);
-            crossyInput.AddListener(InputType.Left, TestLef);
-            crossyInput.AddListener(InputType.Right, TestRig);
+            //crossyInput.AddListener(InputType.Forward, TestFor);
+            //crossyInput.AddListener(InputType.Backward, TestBac);
+            //crossyInput.AddListener(InputType.Left, TestLef);
+            //crossyInput.AddListener(InputType.Right, TestRig);
 
-            laneGenerator.GenerateLevel(20);
+            carStorage.InitializeStorage();
+            laneGenerator.GenerateLevel(carStorage.CarsPool, 20);
         }
 
         public override void UpdateState()

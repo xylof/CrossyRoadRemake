@@ -31,13 +31,16 @@ namespace SDA.Loop
         [SerializeField]
         private LaneGenerator laneGenerator;
 
+        [SerializeField]
+        private CarStorage carStorage;
+
         private BaseState currentlyActiveState;
 
         private void Start()
         {
             transitionToGameState = () => ChangeState(gameState);
 
-            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator);
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage);
             gameState = new GameState(gameView);
 
             ChangeState(menuState);

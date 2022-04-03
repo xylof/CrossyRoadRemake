@@ -583,4 +583,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e67943b0a13a7046a1c738d56d40af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carData: {fileID: 11400000, guid: 33772718274159840b8ddbb4d3657f8d, type: 2}
   carRigidbody: {fileID: 1334279636708521135}
