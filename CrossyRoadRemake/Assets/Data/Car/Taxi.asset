@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cbe6ea823f1294db0ff0eea0bce80c, type: 3}
   m_Name: Taxi
   m_EditorClassIdentifier: 
-  baseSpeed: 500
+  baseSpeed: 350

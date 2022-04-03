@@ -2,7 +2,6 @@ using SDA.Core;
 using SDA.Data;
 using SDA.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,13 +52,13 @@ namespace SDA.Generation
 
         public void SpawnCar(Transform parent)
         {
-            Car obj = pool.GetFromPool(typeToSpawn);
-            obj.transform.SetParent(parent);
-            obj.transform.position = spawnPoints[spawnPointIndex].spawnPositionTransform.position;
-            obj.transform.rotation = spawnPoints[spawnPointIndex].spawnPositionTransform.rotation;
-            obj.OnWallHitAddListener(ReturnToPool);
-            obj.Move(spawnPoints[spawnPointIndex].GetDirection(), obj.GetSpeed());
-            spawnedCars.Add(obj);
+            Car car = pool.GetFromPool(typeToSpawn);
+            car.transform.SetParent(parent);
+            car.transform.position = spawnPoints[spawnPointIndex].spawnPositionTransform.position;
+            car.transform.rotation = spawnPoints[spawnPointIndex].spawnPositionTransform.rotation;
+            car.OnWallHitAddListener(ReturnToPool);
+            car.Move(spawnPoints[spawnPointIndex].GetDirection(), car.GetSpeed());
+            spawnedCars.Add(car);
         }
 
         public void DespawnCars()
