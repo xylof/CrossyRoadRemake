@@ -1,5 +1,7 @@
 using SDA.Input;
 using SDA.UI;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace SDA.Loop
 {
@@ -17,6 +19,7 @@ namespace SDA.Loop
         public override void InitState()
         {
             loseView.ShowView();
+            loseView.RestartButton.onClick.AddListener(RestartScene);
         }
 
         public override void UpdateState()
@@ -27,6 +30,11 @@ namespace SDA.Loop
         {
             loseView?.HideView();
             crossyInput.ClearInputs();
+        }
+
+        private void RestartScene()
+        {
+            SceneManager.LoadScene("Game");
         }
     } 
 }

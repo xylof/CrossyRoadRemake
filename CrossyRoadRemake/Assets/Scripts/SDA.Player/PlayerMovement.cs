@@ -68,8 +68,6 @@ namespace SDA.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            return;
-
             if (other.CompareTag("Wall"))
             {
                 onDie.Invoke();
