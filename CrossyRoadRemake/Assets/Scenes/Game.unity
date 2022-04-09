@@ -152,7 +152,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d882ebe75fb15a41822c33ed79c6aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lanePrefab: {fileID: 8159512784313733036, guid: 2d3be2d42de0bad4599f0f5a20da7cbc, type: 3}
+  chunks:
+  - ranges: {x: 0, y: 30}
+    templates:
+    - {fileID: 11400000, guid: 34ed40a6f195f22498ab5585a0f29f26, type: 2}
+    - {fileID: 11400000, guid: f910af9c09b14f342849091f54c39840, type: 2}
+  - ranges: {x: 31, y: 60}
+    templates:
+    - {fileID: 11400000, guid: 1cd881eb2965d764eaa653e6bb4daab3, type: 2}
+    - {fileID: 11400000, guid: e34f69cb3a7384741bca77986329d37b, type: 2}
+  - ranges: {x: 61, y: 100}
+    templates:
+    - {fileID: 11400000, guid: da3bcbbc528fd0a4f92a70e0bcf585ae, type: 2}
+    - {fileID: 11400000, guid: 428c89ff2650abd4b98096a2c0a84566, type: 2}
   lanesParent: {fileID: 1883123142}
   startingPos: {fileID: 217509492}
   distance: 1.5
@@ -1758,6 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!1 &1298446271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,7 +2090,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6033754, y: 1.3695886, z: 1.1308186}
+  m_Size: {x: 1.46, y: 1.3695886, z: 1.1308186}
   m_Center: {x: 0.00000005960466, y: 0.69493926, z: 0.06612332}
 --- !u!54 &1577895093
 Rigidbody:
@@ -3083,6 +3096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!4 &8159512783666889294
 Transform:
   m_ObjectHideFlags: 0
@@ -3248,6 +3262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!4 &8159512784376435275
 Transform:
   m_ObjectHideFlags: 0
@@ -3291,6 +3306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!1 &8159512784381426662
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,6 +3481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!1 &9005185536245580741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,6 +3646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  isEnalbed: 1
 --- !u!64 &9005185537633076836
 MeshCollider:
   m_ObjectHideFlags: 0
