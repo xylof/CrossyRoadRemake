@@ -16,7 +16,7 @@ namespace SDA.Generation
 
         public bool IsBetween(int count)
         {
-            return ranges.x <= count && count <= ranges.y;
+            return (int)ranges.x <= count && count < (int)ranges.y;
         }
     }
 
@@ -39,7 +39,7 @@ namespace SDA.Generation
         public void GenerateLevel(CarPool<Car> carPool, int lanesCount)
         {
             this.carPool = carPool;
-            var chunk = GetChunk();
+            Chunk chunk = GetChunk();
             currentTemplate = GetTemplate(chunk);
 
             for (int i = 0; i < lanesCount; i++)
@@ -63,7 +63,8 @@ namespace SDA.Generation
         {
             for (int i = 0; i < chunks.Count; i++)
             {
-                var chunk = chunks[i];
+                Chunk chunk = chunks[i];
+
                 if (chunk.IsBetween(counter))
                     return chunk;
             }
@@ -80,12 +81,12 @@ namespace SDA.Generation
         {
             if (templateIterator == currentTemplate.lanes.Length)
             {
-                var chunk = GetChunk();
+                Chunk chunk = GetChunk();
                 currentTemplate = GetTemplate(chunk);
                 templateIterator = 0;
             }
 
-            var lanePrefab = currentTemplate.lanes[templateIterator];
+            Lane lanePrefab = currentTemplate.lanes[templateIterator];
             templateIterator++;
 
             Lane lane = Instantiate(lanePrefab, lanesParent);

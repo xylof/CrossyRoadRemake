@@ -10,6 +10,8 @@ namespace SDA.Player
         private float distance = 1.5f;
         private bool canMove = true;
         private UnityAction onDie;
+        private UnityAction onOneStepForward;
+        private UnityAction onOneStepBackward;
         private Vector3 startPos;
 
         public void InitPlayer()
@@ -26,6 +28,8 @@ namespace SDA.Player
             Vector3 endPosition = transform.position + Vector3.right * distance;
             transform.DORotate(new Vector3(0, 90, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
+
+            onOneStepForward?.Invoke();
         }
 
         public void MoveBackward()
@@ -37,6 +41,8 @@ namespace SDA.Player
             Vector3 endPosition = transform.position + Vector3.right * -distance;
             transform.DORotate(new Vector3(0, 270, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
+
+            onOneStepBackward?.Invoke();
         }
 
         public void MoveLeft()
@@ -64,6 +70,16 @@ namespace SDA.Player
         public void OnDieAddListener(UnityAction callback)
         {
             onDie = callback;
+        }
+
+        public void OnOneStepForwardAddListener(UnityAction callback)
+        {
+            onOneStepForward = callback;
+        }
+
+        public void OnOneStepBackwardAddListener(UnityAction callback)
+        {
+            onOneStepBackward = callback;
         }
 
         private void OnTriggerEnter(Collider other)

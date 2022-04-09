@@ -13,14 +13,16 @@ namespace SDA.Loop
         private PlayerMovement playerMovement;
         private CrossyInput crossyInput;
         private UnityAction transitionToLoseState;
+        private ScoreSystem scoreSystem;
 
-        public GameState(GameView gameView, CameraMovement cameraMovement, PlayerMovement playerMovement, CrossyInput crossyInput, UnityAction transitionToLoseState)
+        public GameState(GameView gameView, CameraMovement cameraMovement, PlayerMovement playerMovement, CrossyInput crossyInput, UnityAction transitionToLoseState, ScoreSystem scoreSystem)
         {
             this.gameView = gameView;
             this.cameraMovement = cameraMovement;
             this.playerMovement = playerMovement;
             this.crossyInput = crossyInput;
             this.transitionToLoseState = transitionToLoseState;
+            this.scoreSystem = scoreSystem;
         }
 
         public override void InitState()
@@ -34,6 +36,8 @@ namespace SDA.Loop
             playerMovement.InitPlayer();
             playerMovement.MoveForward();
             playerMovement.OnDieAddListener(transitionToLoseState);
+            playerMovement.OnOneStepForwardAddListener(scoreSystem.IncrementPoints);
+            playerMovement.OnOneStepBackwardAddListener(scoreSystem.DecrementSteps);
         }
 
         public override void UpdateState()
