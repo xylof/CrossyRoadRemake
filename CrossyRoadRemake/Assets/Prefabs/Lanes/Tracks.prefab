@@ -136,6 +136,7 @@ MonoBehaviour:
     direction: 1
   - spawnPositionTransform: {fileID: 8159512783197110680}
     direction: 0
+  isEnalbed: 1
 --- !u!1 &8159512782987512329
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +212,7 @@ GameObject:
   - component: {fileID: 8159512784313733036}
   - component: {fileID: 3328120720972972503}
   m_Layer: 0
-  m_Name: Lane
+  m_Name: Tracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a536a33230ab4947bede95df8776f8b, type: 2}
+  - {fileID: 2100000, guid: 63768d4cff48dda44bc62c339a26861c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -313,8 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carGenerator: {fileID: 8159512782698729886}
   meshRenderer: {fileID: 8159512784313733033}
-  brightColor: {r: 0.3529412, g: 0.8862745, b: 0.14509805, a: 1}
-  darkColor: {r: 0.14117648, g: 0.34901962, b: 0.0627451, a: 1}
+  brightColor: {r: 0.3882353, g: 0.13725491, b: 0.019607844, a: 1}
+  darkColor: {r: 0.24528301, g: 0.09797535, b: 0.028924879, a: 1}
 --- !u!54 &3328120720972972503
 Rigidbody:
   m_ObjectHideFlags: 0

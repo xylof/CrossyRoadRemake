@@ -34,7 +34,8 @@ namespace SDA.Generation
         public void InitializeLane(CarPool<Car> carPool, CarType carType, int spawnPointIndex)
         {
             carGenerator.InitializeGenerator(carPool, carType, spawnPointIndex);
-            StartCoroutine(GenerateCar(5f));
+            float time = Random.Range(3f, 8f);
+            StartCoroutine(GenerateCar(time));
         }
 
         private IEnumerator GenerateCar(float timeBetweenSpawns)

@@ -37,6 +37,9 @@ namespace SDA.Generation
 
         private List<Car> spawnedCars = new List<Car>();
 
+        [SerializeField]
+        private bool isEnalbed = true;
+
         public void InitializeGenerator(CarPool<Car> pool, CarType type, int spawnIndex)
         {
             this.pool = pool;
@@ -52,6 +55,9 @@ namespace SDA.Generation
 
         public void SpawnCar(Transform parent)
         {
+            if (!isEnalbed)
+                return;
+
             Car car = pool.GetFromPool(typeToSpawn);
             car.transform.SetParent(parent);
             car.transform.position = spawnPoints[spawnPointIndex].spawnPositionTransform.position;
