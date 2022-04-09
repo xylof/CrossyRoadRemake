@@ -29,6 +29,7 @@ namespace SDA.Loop
 
         private UnityAction transitionToGameState;
         private UnityAction transitionToLoseState;
+        private UnityAction transitionToMenuState;
 
         [SerializeField]
         private CrossyInput crossyInput;
@@ -51,6 +52,7 @@ namespace SDA.Loop
         {
             transitionToGameState = () => ChangeState(gameState);
             transitionToLoseState = () => ChangeState(loseState);
+            transitionToMenuState = () => ChangeState(menuState);
 
             menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage);
             gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState);
