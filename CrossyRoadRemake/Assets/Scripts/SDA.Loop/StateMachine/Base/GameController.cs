@@ -46,6 +46,7 @@ namespace SDA.Loop
         [SerializeField]
         private CameraMovement cameraMovement;
 
+        private ScoreSystem scoreSystem;
         private BaseState currentlyActiveState;
 
         private void Start()
@@ -54,9 +55,11 @@ namespace SDA.Loop
             transitionToLoseState = () => ChangeState(loseState);
             transitionToMenuState = () => ChangeState(menuState);
 
+            scoreSystem = new ScoreSystem();
+
             menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage);
-            gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState);
-            loseState = new LoseState(crossyInput, loseView);
+            gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState, scoreSystem);
+            loseState = new LoseState(crossyInput, loseView, scoreSystem);
 
             ChangeState(menuState);
         }
