@@ -1,7 +1,6 @@
 using SDA.Core;
 using SDA.Data;
 using SDA.Utils;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +18,7 @@ namespace SDA.Generation
         [SerializeField] private Car sedanPrefab;
         [SerializeField] private Car taxiPrefab;
         [SerializeField] private Car tractorPrefab;
+        [SerializeField] private Car trainPrefab;
 
         private CarPool<Car> carsPool;
 
@@ -27,14 +27,15 @@ namespace SDA.Generation
         public void InitializeStorage()
         {
             var sizes = new Dictionary<CarType, int>();
-            sizes.Add(CarType.Ambulance, 15);
-            sizes.Add(CarType.Delivery, 15);
-            sizes.Add(CarType.Firetruck, 15);
-            sizes.Add(CarType.HatchbackSports, 15);
-            sizes.Add(CarType.Police, 15);
-            sizes.Add(CarType.Sedan, 15);
-            sizes.Add(CarType.Taxi, 15);
-            sizes.Add(CarType.Tractor, 15);
+            sizes.Add(CarType.Ambulance, 50);
+            sizes.Add(CarType.Delivery, 50);
+            sizes.Add(CarType.Firetruck, 50);
+            sizes.Add(CarType.HatchbackSports, 50);
+            sizes.Add(CarType.Police, 50);
+            sizes.Add(CarType.Sedan, 50);
+            sizes.Add(CarType.Taxi, 50);
+            sizes.Add(CarType.Tractor, 50);
+            sizes.Add(CarType.Train, 50);
 
             carsPool = new CarPool<Car>(sizes, storageParent);
             InitializePool(CarType.Ambulance, ambulancePrefab);
@@ -45,6 +46,7 @@ namespace SDA.Generation
             InitializePool(CarType.Sedan, sedanPrefab);
             InitializePool(CarType.Taxi, taxiPrefab);
             InitializePool(CarType.Tractor, tractorPrefab);
+            InitializePool(CarType.Train, trainPrefab);
         }
 
         private void InitializePool(CarType type, Car prefab)

@@ -93,6 +93,12 @@ namespace SDA.Generation
             lane.transform.position = startingPos.position + Vector3.right * distance * counter++;
             lane.transform.rotation = startingPos.rotation;
             lane.SetColor(counter);
+
+            if(lane.overridingData.isOvveriding)
+            {
+                carType = lane.overridingData.type;
+            }
+
             lane.InitializeLane(carPool, carType, spawnPointIndex);
             lane.OnDespawnAddListener(OnLanedespawn);
         }

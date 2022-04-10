@@ -314,6 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carGenerator: {fileID: 8159512782698729886}
   meshRenderer: {fileID: 8159512784313733033}
+  isOverride: 1
+  overridingCar: 8
   brightColor: {r: 0.3882353, g: 0.13725491, b: 0.019607844, a: 1}
   darkColor: {r: 0.24528301, g: 0.09797535, b: 0.028924879, a: 1}
 --- !u!54 &3328120720972972503

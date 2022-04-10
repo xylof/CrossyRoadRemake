@@ -11,17 +11,21 @@ namespace SDA.Loop
         private CrossyInput crossyInput;
         private LoseView loseView;
         private ScoreSystem scoreSystem;
+        private SaveSystem saveSystem;
 
-        public LoseState(CrossyInput crossyInput, LoseView loseView, ScoreSystem scoreSystem)
+        public LoseState(CrossyInput crossyInput, LoseView loseView, ScoreSystem scoreSystem, SaveSystem saveSystem)
         {
             this.crossyInput = crossyInput;
             this.loseView = loseView;
             this.scoreSystem = scoreSystem;
+            this.saveSystem = saveSystem;
         }
 
         public override void InitState()
         {
             loseView.ShowView();
+            saveSystem.LoadedData.bestScore = scoreSystem.BestScore;
+            saveSystem.SaveData();
             loseView.RestartButton.onClick.AddListener(RestartScene);
             loseView.SetPoints(scoreSystem.GetPoints);
         }

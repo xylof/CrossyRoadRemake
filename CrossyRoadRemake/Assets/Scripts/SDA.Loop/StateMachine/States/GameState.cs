@@ -14,8 +14,9 @@ namespace SDA.Loop
         private CrossyInput crossyInput;
         private UnityAction transitionToLoseState;
         private ScoreSystem scoreSystem;
+        private AudioSystem audioSystem;
 
-        public GameState(GameView gameView, CameraMovement cameraMovement, PlayerMovement playerMovement, CrossyInput crossyInput, UnityAction transitionToLoseState, ScoreSystem scoreSystem)
+        public GameState(GameView gameView, CameraMovement cameraMovement, PlayerMovement playerMovement, CrossyInput crossyInput, UnityAction transitionToLoseState, ScoreSystem scoreSystem, AudioSystem audioSystem)
         {
             this.gameView = gameView;
             this.cameraMovement = cameraMovement;
@@ -23,6 +24,7 @@ namespace SDA.Loop
             this.crossyInput = crossyInput;
             this.transitionToLoseState = transitionToLoseState;
             this.scoreSystem = scoreSystem;
+            this.audioSystem = audioSystem;
         }
 
         public override void InitState()
@@ -35,14 +37,24 @@ namespace SDA.Loop
             crossyInput.AddListener(InputType.Right, playerMovement.MoveRight);
             playerMovement.InitPlayer();
             playerMovement.MoveForward();
-            playerMovement.OnDieAddListener(transitionToLoseState);
+
+            UnityAction onDieAction = transitionToLoseState;
+            onDieAction += audioSystem.PlayDeathMusic;
+
+            playerMovement.OnJumpAddListener(audioSystem.PlayJumpMusic);
+            scoreSystem.onBestScoreAddListener(audioSystem.PlayBestScoreMusic);
+
+            playerMovement.OnDieAddListener(onDieAction);
             playerMovement.OnOneStepForwardAddListener(scoreSystem.IncrementPoints);
             playerMovement.OnOneStepBackwardAddListener(scoreSystem.DecrementSteps);
+
+            audioSystem.PlayGameMusic();
         }
 
         public override void UpdateState()
         {
             cameraMovement.UpdateCameraPosition();
+            gameView.UpdateScore(scoreSystem.GetPoints, scoreSystem.BestScore);
         }
 
         public override void DisposeState()
