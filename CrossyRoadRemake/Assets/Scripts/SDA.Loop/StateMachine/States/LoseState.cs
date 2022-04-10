@@ -23,7 +23,7 @@ namespace SDA.Loop
         {
             loseView.ShowView();
             loseView.RestartButton.onClick.AddListener(RestartScene);
-            loseView.ScoreText.text = $"Score: {scoreSystem.GetPoints}";
+            loseView.SetPoints(scoreSystem.GetPoints);
         }
 
         public override void UpdateState()
