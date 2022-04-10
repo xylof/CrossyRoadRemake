@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace SDA.Data
 {
     public enum CarType
@@ -13,6 +9,7 @@ namespace SDA.Data
         Police,
         Sedan,
         Taxi,
-        Tractor
+        Tractor,
+        Train
     } 
 }

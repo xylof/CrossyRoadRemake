@@ -14,6 +14,11 @@ namespace SDA.Generation
 
         [SerializeField] private MeshRenderer meshRenderer;
 
+        [SerializeField] private bool isOverride = false;
+        [SerializeField] private CarType overridingCar;
+
+        public (bool isOvveriding, CarType type) overridingData => (isOverride, overridingCar);
+
         [SerializeField] private Color brightColor;
         [SerializeField] private Color darkColor;
 

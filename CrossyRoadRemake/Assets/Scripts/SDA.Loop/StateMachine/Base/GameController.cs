@@ -47,6 +47,11 @@ namespace SDA.Loop
         private CameraMovement cameraMovement;
 
         private ScoreSystem scoreSystem;
+        private SaveSystem saveSystem;
+
+        [SerializeField]
+        private AudioSystem audioSystem;
+
         private BaseState currentlyActiveState;
 
         private void Start()
@@ -56,10 +61,11 @@ namespace SDA.Loop
             transitionToMenuState = () => ChangeState(menuState);
 
             scoreSystem = new ScoreSystem();
+            saveSystem = new SaveSystem();
 
-            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage);
-            gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState, scoreSystem);
-            loseState = new LoseState(crossyInput, loseView, scoreSystem);
+            menuState = new MenuState(crossyInput, transitionToGameState, menuView, laneGenerator, carStorage, scoreSystem, saveSystem, audioSystem);
+            gameState = new GameState(gameView, cameraMovement, playerMovement, crossyInput, transitionToLoseState, scoreSystem, audioSystem);
+            loseState = new LoseState(crossyInput, loseView, scoreSystem, saveSystem);
 
             ChangeState(menuState);
         }
@@ -79,6 +85,12 @@ namespace SDA.Loop
             currentlyActiveState?.DisposeState();
             currentlyActiveState = newState;
             newState.InitState();
+        }
+
+        private void OnApplicationQuit()
+        {
+            saveSystem.LoadedData.bestScore = scoreSystem.BestScore;
+            saveSystem.SaveData();
         }
     } 
 }

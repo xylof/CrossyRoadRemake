@@ -10,9 +10,11 @@ namespace SDA.Player
         private float distance = 1.5f;
         private bool canMove = true;
         private UnityAction onDie;
+        private UnityAction onJump;
         private UnityAction onOneStepForward;
         private UnityAction onOneStepBackward;
         private Vector3 startPos;
+        private bool IsDead = false;
 
         public void InitPlayer()
         {
@@ -24,12 +26,16 @@ namespace SDA.Player
             if (!canMove)
                 return;
 
+            if (Physics.Raycast(transform.position, Vector3.right, 1.5f, 64))
+                return;
+
             canMove = false;
             Vector3 endPosition = transform.position + Vector3.right * distance;
             transform.DORotate(new Vector3(0, 90, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
 
             onOneStepForward?.Invoke();
+            onJump?.Invoke();
         }
 
         public void MoveBackward()
@@ -37,12 +43,17 @@ namespace SDA.Player
             if (!canMove)
                 return;
 
+            if (Physics.Raycast(transform.position, Vector3.left, 1.5f, 64))
+                return;
+
             canMove = false;
-            Vector3 endPosition = transform.position + Vector3.right * -distance;
+            Vector3 endPosition = transform.position + Vector3.left * distance;
             transform.DORotate(new Vector3(0, 270, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
 
             onOneStepBackward?.Invoke();
+            onJump?.Invoke();
+
         }
 
         public void MoveLeft()
@@ -50,10 +61,15 @@ namespace SDA.Player
             if (!canMove)
                 return;
 
+            if (Physics.Raycast(transform.position, Vector3.forward, 1.5f, 64))
+                return;
+
             canMove = false;
             Vector3 endPosition = transform.position + Vector3.forward * distance;
             transform.DORotate(new Vector3(0, 0, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
+
+            onJump?.Invoke();
         }
 
         public void MoveRight()
@@ -61,10 +77,15 @@ namespace SDA.Player
             if (!canMove)
                 return;
 
+            if (Physics.Raycast(transform.position, Vector3.back, 1.5f, 64))
+                return;
+
             canMove = false;
-            Vector3 endPosition = transform.position + Vector3.forward * -distance;
+            Vector3 endPosition = transform.position + Vector3.back * distance;
             transform.DORotate(new Vector3(0, 180, 0), 0.2f);
             transform.DOJump(endPosition, 1, 1, 0.2f).OnComplete(() => canMove = true);
+
+            onJump?.Invoke();
         }
 
         public void OnDieAddListener(UnityAction callback)
@@ -82,11 +103,20 @@ namespace SDA.Player
             onOneStepBackward = callback;
         }
 
+        public void OnJumpAddListener(UnityAction callback)
+        {
+            onJump = callback;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
+            if (IsDead)
+                return;
+
             if (other.CompareTag("Wall"))
             {
                 onDie.Invoke();
+                IsDead = true;
             }
             else if(other.CompareTag("Car"))
             {
@@ -96,6 +126,7 @@ namespace SDA.Player
                 }
 
                 onDie.Invoke();
+                IsDead = true;
             }
         }
     }
