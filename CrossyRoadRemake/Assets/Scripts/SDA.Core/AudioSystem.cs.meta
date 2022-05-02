@@ -3,7 +3,15 @@ guid: 9366e2ec762539a40a584a1a3f1d070e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - backgoroundMusicAudioSource: {instanceID: 0}
+  - soundsAudioSource: {instanceID: 0}
+  - menuMusic: {instanceID: 0}
+  - gameMusic: {instanceID: 0}
+  - death: {instanceID: 0}
+  - jump: {instanceID: 0}
+  - youLose: {instanceID: 0}
+  - bestScore: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

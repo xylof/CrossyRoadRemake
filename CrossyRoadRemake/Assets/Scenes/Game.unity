@@ -2193,7 +2193,7 @@ AudioSource:
   m_Volume: 0.527
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -2289,7 +2289,7 @@ AudioSource:
   m_Volume: 0.827
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -2385,8 +2385,8 @@ MonoBehaviour:
   backgoroundMusicAudioSource: {fileID: 1252492738}
   soundsAudioSource: {fileID: 1252492737}
   menuMusic: {fileID: 8300000, guid: 1c1807de71c7d3b418dab570d3589310, type: 3}
-  gameMusic: {fileID: 8300000, guid: 247ca368707e34447ad420712ca80a7d, type: 3}
-  death: {fileID: 8300000, guid: ae180dbc6606f9b49ac1e38c60c6ca01, type: 3}
+  gameMusic: {fileID: 8300000, guid: 09499c322193af54aa390bcdf71f6ad2, type: 3}
+  death: {fileID: 8300000, guid: ba131fc43359336418f79689b4c782aa, type: 3}
   jump: {fileID: 8300000, guid: 897b221eab77a4e4ba108e4fdbf775ec, type: 3}
   youLose: {fileID: 8300000, guid: f551d1592aae7904199b7728f33c8e53, type: 3}
   bestScore: {fileID: 8300000, guid: a57330a6d6151434fbb13060bd62c605, type: 3}

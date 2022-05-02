@@ -120,9 +120,14 @@ namespace SDA.Player
             }
             else if(other.CompareTag("Car"))
             {
-                if (Math.Abs(transform.position.y - startPos.y) < 0.1f)
+                if (Math.Abs(transform.position.y - startPos.y) < 0.01f)
                 {
                     transform.DOScaleY(0.05f, 0.1f);
+                }
+                else
+                {
+                    transform.DOScaleY(0.05f, 0.1f);
+                    transform.SetParent(other.transform);
                 }
 
                 onDie.Invoke();
