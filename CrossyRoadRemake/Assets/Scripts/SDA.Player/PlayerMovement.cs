@@ -126,7 +126,7 @@ namespace SDA.Player
                 }
                 else
                 {
-                    transform.DOScaleY(0.05f, 0.1f);
+                    transform.DOScaleZ(0.05f, 0.1f);
                     transform.SetParent(other.transform);
                 }
 
